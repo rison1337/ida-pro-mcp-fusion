@@ -51,6 +51,8 @@ IDB_OPEN_MODES = {
 
 IDB_MANAGEMENT_TOOLS = {
     "idb_open",
+    "idb_batch_open",
+    "idb_close",
     "idb_list",
 }
 WORKER_TCP_HEALTH_TIMEOUT_SEC = 0.5
@@ -63,6 +65,11 @@ WORKER_RPC_HEALTH_TIMEOUT_SEC = 2.0
 # RPC waiting on it) forever, with no progress feedback and no recovery.
 # Set IDA_MCP_OPEN_TIMEOUT=0 to wait indefinitely (previous behavior).
 WORKER_OPEN_TIMEOUT_SEC = float(os.environ.get("IDA_MCP_OPEN_TIMEOUT", "1800"))
+
+# Upper bound (seconds) for opening a binary when automatic analysis is disabled.
+# Even "load only" can hang on malformed or unusually expensive inputs. Set
+# IDA_MCP_LOAD_TIMEOUT=0 to wait indefinitely.
+WORKER_LOAD_TIMEOUT_SEC = float(os.environ.get("IDA_MCP_LOAD_TIMEOUT", "300"))
 
 
 def _import_zeromcp():
@@ -135,6 +142,35 @@ class IdalibListResult(TypedDict, total=False):
     sessions: list[IdalibSessionListInfo]
     count: int
     error: str
+
+
+class IdalibCloseResult(TypedDict, total=False):
+    success: bool
+    session_id: str
+    backend: str
+    terminated: bool
+    message: str
+    error: str
+
+
+class IdalibBatchOpenItem(TypedDict, total=False):
+    input_path: str
+    success: bool
+    session: IdalibSessionInfo
+    warmup: dict[str, Any] | None
+    cache: dict[str, Any] | None
+    closed: IdalibCloseResult | None
+    fallback_used: bool
+    fallback_reason: str
+    error: str
+
+
+class IdalibBatchOpenResult(TypedDict, total=False):
+    ok: bool
+    items: list[IdalibBatchOpenItem]
+    count: int
+    successes: int
+    errors: int
 
 
 @dataclass
@@ -574,6 +610,29 @@ class IdalibSupervisor:
             self.path_to_session.pop(path_key, None)
         return session
 
+    def close_session(self, session_id: str, *, terminate: bool = True) -> IdalibCloseResult:
+        with self._lock:
+            session = self._unregister_session_locked(session_id)
+        if session is None:
+            return {"success": False, "session_id": session_id, "error": f"Session not found: {session_id}"}
+
+        terminated = False
+        if terminate and session.backend == "worker" and session.owned:
+            self._terminate_worker(session)
+            terminated = True
+
+        return {
+            "success": True,
+            "session_id": session_id,
+            "backend": session.backend,
+            "terminated": terminated,
+            "message": (
+                "Session closed and worker terminated"
+                if terminated
+                else "Session closed locally"
+            ),
+        }
+
     def _discard_opened_worker_session(self, worker: WorkerSession) -> None:
         # Race lost: we opened a worker but a competing thread already
         # registered another worker for the same path. The losing worker is
@@ -723,7 +782,11 @@ class IdalibSupervisor:
         if break_for_launch:
             return self._launch_gui_and_adopt(resolved, session_id)
 
-        open_timeout = (WORKER_OPEN_TIMEOUT_SEC or None) if run_auto_analysis else None
+        open_timeout = (
+            (WORKER_OPEN_TIMEOUT_SEC or None)
+            if run_auto_analysis
+            else (WORKER_LOAD_TIMEOUT_SEC or None)
+        )
         try:
             opened = self.call_worker_tool(
                 worker,
@@ -743,11 +806,17 @@ class IdalibSupervisor:
         except TimeoutError:
             self._terminate_worker(worker)
             self._cleanup_partial_database(resolved)
+            action = "opening and analyzing" if run_auto_analysis else "loading"
+            retry_hint = (
+                "Retry with run_auto_analysis=false (open without analysis and "
+                "decompile on demand), or raise IDA_MCP_OPEN_TIMEOUT."
+                if run_auto_analysis
+                else "Raise IDA_MCP_LOAD_TIMEOUT or skip this binary."
+            )
             raise RuntimeError(
-                f"idalib worker timed out after {open_timeout:.0f}s while opening and "
-                f"analyzing {resolved}. The binary may drive auto-analysis into an "
-                f"unbounded loop. Retry with run_auto_analysis=false (open without "
-                f"analysis and decompile on demand), or raise IDA_MCP_OPEN_TIMEOUT."
+                f"idalib worker timed out after {open_timeout:.0f}s while {action} "
+                f"{resolved}. The binary may drive IDA into an expensive or "
+                f"unbounded workload. {retry_hint}"
             ) from None
         except Exception:
             self._terminate_worker(worker)
@@ -1034,6 +1103,20 @@ def _jsonrpc_error(request_id: Any, code: int, message: str) -> dict | None:
     return {"jsonrpc": "2.0", "error": {"code": code, "message": message}, "id": request_id}
 
 
+def _normalize_batch_input_paths(input_paths: list[str] | str) -> list[str]:
+    if isinstance(input_paths, str):
+        return [input_paths]
+    return [str(path) for path in input_paths]
+
+
+def _make_batch_session_id(prefix: str, index: int, input_path: str) -> str:
+    stem = Path(input_path).stem or "binary"
+    safe_stem = "".join(ch if ch.isalnum() else "_" for ch in stem).strip("_")
+    safe_stem = safe_stem[:40] or "binary"
+    safe_prefix = "".join(ch if ch.isalnum() or ch in "_-" else "_" for ch in (prefix or "batch"))
+    return f"{safe_prefix}_{index}_{safe_stem}"
+
+
 @mcp.tool
 def idb_open(
     input_path: Annotated[str, "Path to the binary file to analyze"],
@@ -1075,6 +1158,144 @@ def idb_open(
         }
     except Exception as e:
         return {"error": str(e)}
+
+
+@mcp.tool
+def idb_close(
+    database: Annotated[str, "Session ID returned by idb_open or idb_batch_open"],
+    terminate_worker: Annotated[
+        bool,
+        "Terminate an owned headless worker immediately instead of only forgetting the session",
+    ] = True,
+) -> IdalibCloseResult:
+    """Close a supervisor database session and optionally terminate its worker."""
+    sup = _require_supervisor()
+    try:
+        return sup.close_session(database, terminate=terminate_worker)
+    except Exception as e:
+        return {"success": False, "session_id": database, "error": str(e)}
+
+
+@mcp.tool
+def idb_batch_open(
+    input_paths: Annotated[
+        list[str] | str,
+        "Binary paths to open. Pass a list for multi-file analysis.",
+    ],
+    mode: Annotated[
+        str,
+        "Open mode passed to idb_open: prefer_headless, force_headless, prefer_gui, or force_gui",
+    ] = "prefer_headless",
+    run_auto_analysis: Annotated[bool, "Run automatic analysis for each binary"] = True,
+    build_caches: Annotated[bool, "Build core IDA caches after opening each binary"] = True,
+    init_hexrays: Annotated[bool, "Initialize Hex-Rays for each binary"] = False,
+    refresh_cache: Annotated[
+        bool,
+        "Build the persistent SQLite cache after each successful open",
+    ] = True,
+    cache_include_xrefs: Annotated[
+        bool,
+        "Include xrefs/callgraph edges in the persistent cache",
+    ] = True,
+    close_after_cache: Annotated[
+        bool,
+        "Close each session after its persistent cache is built; useful for batches larger than max-workers",
+    ] = False,
+    retry_without_auto_analysis_on_timeout: Annotated[
+        bool,
+        "If auto-analysis times out, retry the file once with run_auto_analysis=false and a fast cache",
+    ] = True,
+    idle_ttl_sec: Annotated[
+        int,
+        "Minimum idle TTL in seconds before each worker self-exits",
+    ] = 600,
+    session_prefix: Annotated[
+        str,
+        "Prefix for generated session IDs, e.g. sample_1_calc",
+    ] = "batch",
+) -> IdalibBatchOpenResult:
+    """Open several binaries and optionally build their persistent caches."""
+    sup = _require_supervisor()
+    paths = _normalize_batch_input_paths(input_paths)
+    items: list[IdalibBatchOpenItem] = []
+
+    for index, path in enumerate(paths, start=1):
+        item: IdalibBatchOpenItem = {
+            "input_path": path,
+            "success": False,
+            "fallback_used": False,
+            "fallback_reason": "",
+        }
+        try:
+            session_id = _make_batch_session_id(session_prefix, index, path)
+            try:
+                session = sup.open_session(
+                    path,
+                    mode=mode,
+                    run_auto_analysis=run_auto_analysis,
+                    build_caches=build_caches,
+                    init_hexrays=init_hexrays,
+                    idle_ttl_sec=idle_ttl_sec,
+                    session_id=session_id,
+                )
+                cache_xrefs_for_this_file = cache_include_xrefs
+            except Exception as open_error:
+                message = str(open_error)
+                can_retry = (
+                    retry_without_auto_analysis_on_timeout
+                    and run_auto_analysis
+                    and "timed out" in message
+                )
+                if not can_retry:
+                    raise
+                item["fallback_used"] = True
+                item["fallback_reason"] = message
+                session = sup.open_session(
+                    path,
+                    mode=mode,
+                    run_auto_analysis=False,
+                    build_caches=build_caches,
+                    init_hexrays=False,
+                    idle_ttl_sec=idle_ttl_sec,
+                    session_id=session_id,
+                )
+                cache_xrefs_for_this_file = False
+            item.update(
+                {
+                    "success": True,
+                    "session": session.to_dict(),
+                    "warmup": session.last_warmup,
+                    "cache": None,
+                    "closed": None,
+                }
+            )
+            if refresh_cache:
+                item["cache"] = sup.call_worker_tool(
+                    session,
+                    "cache_refresh_if_stale",
+                    {
+                        "max_age_sec": 0,
+                        "wait_auto_analysis": False,
+                        "include_xrefs": cache_xrefs_for_this_file,
+                        "force": True,
+                    },
+                    timeout=300.0,
+                )
+            if close_after_cache:
+                item["closed"] = sup.close_session(session.session_id, terminate=True)
+        except Exception as e:
+            item["error"] = str(e)
+        items.append(item)
+
+    successes = sum(1 for item in items if item.get("success"))
+    errors = len(items) - successes
+    return {
+        "ok": errors == 0,
+        "items": items,
+        "count": len(items),
+        "successes": successes,
+        "errors": errors,
+    }
 
 
 @mcp.tool

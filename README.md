@@ -1,10 +1,49 @@
-# IDA Pro MCP
+# IDA Pro MCP — Fusion Edition
 
-Simple [MCP Server](https://modelcontextprotocol.io/introduction) to allow vibe reversing in IDA Pro.
+Simple [MCP Server](https://modelcontextprotocol.io/introduction) to allow vibe reversing in IDA Pro — the **Fusion Edition** fuses the latest upstream with a persistent SQLite cache and a multi-binary headless supervisor (**76 tools**).
 
 https://github.com/user-attachments/assets/6ebeaa92-a9db-43fa-b756-eececce2aca0
 
 The binaries and prompt for the video are available in the [mcp-reversing-dataset](https://github.com/mrexodia/mcp-reversing-dataset) repository.
+
+> [!NOTE]
+> **Enhanced fork** of [`mrexodia/ida-pro-mcp`](https://github.com/mrexodia/ida-pro-mcp), rebased on the latest upstream and merged with the best ideas from
+> [`QiuChenly/ida-pro-mcp-enhancement`](https://github.com/QiuChenly/ida-pro-mcp-enhancement) and
+> [`winmin/ida-headless-mcp`](https://github.com/winmin/ida-headless-mcp).
+> Everything upstream still works — this fork only **adds** capability. See the **What this fork adds** section below.
+
+## ✨ What this fork adds
+
+This fork keeps 100% of upstream behaviour and layers three things on top of it:
+
+### 🗃️ Persistent SQLite cache
+
+A per-database `<binary>.i64.mcp.sqlite` cache of strings, functions, globals, imports, cross-references and call-graph edges. Reads are served straight from SQLite instead of round-tripping through IDA's single-threaded API — a large speedup for big binaries and repeated triage. Ships **9 dedicated cache tools**:
+
+`cache_status` · `refresh_cache` · `cache_refresh_if_stale` · `cache_list_funcs` · `cache_entity_query` · `cache_xrefs` · `cache_callgraph` · `cache_callgraph_hotspots` · `cache_find_regex`
+
+Freshness is tracked via the IDB mtime plus a schema version, so a stale cache rebuilds automatically and outdated rows are never served.
+
+### 🧵 Multi-binary headless supervisor
+
+The idalib supervisor manages a **pool of persistent workers** and exposes true multi-database session control:
+
+- **`idb_batch_open`** — open many binaries at once, warm Hex-Rays, and build each persistent cache, with an optional `close_after_cache` for batches larger than `--max-workers`.
+- **`idb_close`** — cleanly close a session and terminate its owned worker.
+
+Combined with `--max-workers`, this turns the server into a headless analysis farm you can drive across dozens of samples from a single MCP endpoint.
+
+### 📈 76 tools, one endpoint
+
+The union of the upstream toolset and the additions above brings the live tool count to **76**, spanning discovery, decompilation, disassembly, CFG, xrefs / call-graph, search, data reads, type & struct editing, signatures, IDB modification, the SQLite cache, and multi-session management.
+
+| Capability | upstream | QiuChenly | winmin | **this fork** |
+|---|:---:|:---:|:---:|:---:|
+| Live tools | ~40 | ~50 | 66 | **76** |
+| Based on latest upstream | ✅ | ✖️ | ✖️ | ✅ |
+| Persistent SQLite cache | ✖️ | ✅ | ✖️ | ✅ |
+| Multi-worker headless pool | basic | ✖️ | ✅ | ✅ |
+| Batch open + cache build | ✖️ | ✖️ | partial | ✅ |
 
 ## Prerequisites
 
