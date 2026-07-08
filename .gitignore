@@ -32,6 +32,9 @@ venv*/
 # Generated server files
 server_generated.py
 
+# Local release/publisher tools
+.tools/
+
 # Coverage
 .coverage*
 htmlcov/

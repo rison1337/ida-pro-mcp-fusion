@@ -1,0 +1,98 @@
+{
+  "manifest_version": "0.4",
+  "name": "ida-pro-mcp-fusion",
+  "display_name": "IDA Pro MCP Fusion",
+  "version": "2.0.0",
+  "description": "IDA Pro MCP fusion with 76 reverse-engineering tools, persistent SQLite cache queries, and multi-binary headless analysis sessions.",
+  "long_description": "Fusion fork of IDA Pro MCP for agentic reverse engineering. It keeps upstream IDA Pro MCP behavior and adds a persistent SQLite cache, cache query tools, a multi-worker headless idalib supervisor, batch IDB opening, and clean session closing for single-binary and multi-binary reversing workflows. Requires a local IDA Pro installation and IDA's Python/idalib support.",
+  "author": {
+    "name": "rison1337",
+    "url": "https://github.com/rison1337"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rison1337/ida-pro-mcp-fusion.git"
+  },
+  "homepage": "https://github.com/rison1337/ida-pro-mcp-fusion",
+  "documentation": "https://github.com/rison1337/ida-pro-mcp-fusion#readme",
+  "support": "https://github.com/rison1337/ida-pro-mcp-fusion/issues",
+  "icon": "assets/logo-512.png",
+  "server": {
+    "type": "uv",
+    "entry_point": "src/ida_pro_mcp/idalib_supervisor.py",
+    "mcp_config": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "${__dirname}",
+        "idalib-mcp",
+        "--stdio"
+      ]
+    }
+  },
+  "tools": [
+    {
+      "name": "idb_open",
+      "description": "Open a binary or IDB in a persistent headless IDA analysis session."
+    },
+    {
+      "name": "idb_batch_open",
+      "description": "Open many binaries, warm analysis, and build persistent caches across worker sessions."
+    },
+    {
+      "name": "idb_close",
+      "description": "Close an owned headless IDA session and terminate its worker cleanly."
+    },
+    {
+      "name": "cache_status",
+      "description": "Inspect the persistent SQLite cache state for the active IDA database."
+    },
+    {
+      "name": "refresh_cache",
+      "description": "Refresh cached functions, strings, imports, globals, xrefs, and call graph edges."
+    },
+    {
+      "name": "cache_find_regex",
+      "description": "Search the persistent cache with regular expressions."
+    },
+    {
+      "name": "decompile_function",
+      "description": "Return Hex-Rays pseudocode for a function when available."
+    },
+    {
+      "name": "disassemble_function",
+      "description": "Return disassembly for a function."
+    },
+    {
+      "name": "get_xrefs_to",
+      "description": "Find cross-references to an address or symbol."
+    },
+    {
+      "name": "list_functions",
+      "description": "List functions discovered in the current database."
+    }
+  ],
+  "tools_generated": true,
+  "keywords": [
+    "ida",
+    "ida-pro",
+    "reverse-engineering",
+    "malware-analysis",
+    "binary-analysis",
+    "mcp",
+    "sqlite-cache",
+    "headless-ida"
+  ],
+  "license": "MIT",
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "linux",
+      "win32"
+    ],
+    "runtimes": {
+      "python": ">=3.11"
+    }
+  }
+}

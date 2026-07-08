@@ -1,0 +1,22 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.rison1337/ida-pro-mcp-fusion",
+  "title": "IDA Pro MCP Fusion",
+  "description": "IDA Pro MCP fusion with cache queries and multi-binary headless analysis.",
+  "repository": {
+    "url": "https://github.com/rison1337/ida-pro-mcp-fusion",
+    "source": "github"
+  },
+  "version": "2.0.0",
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/rison1337/ida-pro-mcp-fusion/releases/download/v2.0.0/ida-pro-mcp-fusion-2.0.0.mcpb",
+      "version": "2.0.0",
+      "fileSha256": "f432d5051f6fd3e3af0007645c95eaf6df985c4b65dc8c2cb7bdca8837e65c0d",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
