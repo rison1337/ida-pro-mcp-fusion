@@ -1,6 +1,11 @@
 # IDA Pro MCP — Fusion Edition
 
+<!-- mcp-name: io.github.rison1337/ida-pro-mcp-fusion -->
+
 Simple [MCP Server](https://modelcontextprotocol.io/introduction) to allow vibe reversing in IDA Pro — the **Fusion Edition** fuses the latest upstream with a persistent SQLite cache and a multi-binary headless supervisor (**76 tools**).
+
+**Registry name:** `io.github.rison1337/ida-pro-mcp-fusion`<br>
+**Repository:** <https://github.com/rison1337/ida-pro-mcp-fusion>
 
 https://github.com/user-attachments/assets/6ebeaa92-a9db-43fa-b756-eececce2aca0
 
@@ -78,7 +83,39 @@ Concretely, this fork adds **11 tools over upstream** — the 9-tool `cache_*` s
   - [Zed](https://zed.dev/)
   - [Other MCP Clients](https://modelcontextprotocol.io/clients#example-clients): Run `ida-pro-mcp --config` to get the JSON config for your client.
 
-## Installation (Claude Code)
+## Installation (Fusion Edition)
+
+For MCP clients that can run a stdio command, use the GitHub-backed `uvx` command:
+
+```json
+{
+  "mcpServers": {
+    "ida-pro-mcp-fusion": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/rison1337/ida-pro-mcp-fusion",
+        "idalib-mcp",
+        "--stdio"
+      ]
+    }
+  }
+}
+```
+
+Claude Code:
+
+```bash
+claude mcp add ida-pro-mcp-fusion -- uvx --from git+https://github.com/rison1337/ida-pro-mcp-fusion idalib-mcp --stdio
+```
+
+Manual pip/uv install from this fork:
+
+```bash
+pip install https://github.com/rison1337/ida-pro-mcp-fusion/archive/refs/heads/main.zip
+```
+
+## Installation (upstream Claude plugin)
 
 To install the headless IDA Pro MCP in Claude Code:
 
@@ -93,7 +130,7 @@ To update to the latest version:
 claude plugin update ida-pro-mcp@mrexodia
 ```
 
-**Note**: This requires having idalib activated globally and [uv](https://astral.sh/uv) installed:
+**Note**: The Claude plugin commands above install the upstream marketplace package. For this Fusion fork, use the `uvx --from git+https://github.com/rison1337/ida-pro-mcp-fusion ...` command shown above. Both modes require having idalib activated globally and [uv](https://astral.sh/uv) installed:
 
 ```bash
 # windows
@@ -110,7 +147,7 @@ If you want to configure the MCP server manually from the IDA GUI:
 
 ```sh
 pip uninstall ida-pro-mcp
-pip install https://github.com/mrexodia/ida-pro-mcp/archive/refs/heads/main.zip
+pip install https://github.com/rison1337/ida-pro-mcp-fusion/archive/refs/heads/main.zip
 ```
 
 Configure the MCP servers and install the IDA Plugin:
