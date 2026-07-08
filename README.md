@@ -26,24 +26,26 @@ Freshness is tracked via the IDB mtime plus a schema version, so a stale cache r
 
 ### 🧵 Multi-binary headless supervisor
 
-The idalib supervisor manages a **pool of persistent workers** and exposes true multi-database session control:
+Upstream exposes `idb_open` and `idb_list`; this fork grows the idalib supervisor into a **pool of persistent workers** and adds **2 new session tools**:
 
-- **`idb_batch_open`** — open many binaries at once, warm Hex-Rays, and build each persistent cache, with an optional `close_after_cache` for batches larger than `--max-workers`.
-- **`idb_close`** — cleanly close a session and terminate its owned worker.
+- **`idb_batch_open`** *(new)* — open many binaries at once, warm Hex-Rays, and build each persistent cache, with a `close_after_cache` option for batches larger than `--max-workers` (plus `session_prefix` and auto-analysis-timeout retry).
+- **`idb_close`** *(new)* — cleanly close a session and terminate its owned worker.
 
 Combined with `--max-workers`, this turns the server into a headless analysis farm you can drive across dozens of samples from a single MCP endpoint.
 
 ### 📈 76 tools, one endpoint
 
-The union of the upstream toolset and the additions above brings the live tool count to **76**, spanning discovery, decompilation, disassembly, CFG, xrefs / call-graph, search, data reads, type & struct editing, signatures, IDB modification, the SQLite cache, and multi-session management.
+Concretely, this fork adds **11 tools over upstream** — the 9-tool `cache_*` suite plus `idb_close` and `idb_batch_open` — bringing the live count to **76**, spanning discovery, decompilation, disassembly, CFG, xrefs / call-graph, search, data reads, type & struct editing, signatures, IDB modification, the SQLite cache, and multi-session management.
 
 | Capability | upstream | QiuChenly | winmin | **this fork** |
 |---|:---:|:---:|:---:|:---:|
-| Live tools | ~40 | ~50 | 66 | **76** |
+| Live tools | ~65 | ~50 | 66 | **76** |
 | Based on latest upstream | ✅ | ✖️ | ✖️ | ✅ |
 | Persistent SQLite cache | ✖️ | ✅ | ✖️ | ✅ |
 | Multi-worker headless pool | basic | ✖️ | ✅ | ✅ |
 | Batch open + cache build | ✖️ | ✖️ | partial | ✅ |
+
+<sub>Tool counts are approximate and depend on each project's upstream base and enabled profile; QiuChenly/winmin forked from an earlier upstream, so this fork's 76 reflects the newest upstream plus the 11 additions above.</sub>
 
 ## Prerequisites
 

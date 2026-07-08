@@ -24,6 +24,11 @@ venv*/
 *.elf
 !tests/typed_fixture.elf
 
+# Persistent MCP SQLite cache (api_cache.py)
+*.mcp.sqlite
+*.mcp.sqlite-shm
+*.mcp.sqlite-wal
+
 # Generated server files
 server_generated.py
 

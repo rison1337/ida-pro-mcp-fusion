@@ -182,6 +182,25 @@ def _regexp(expr: str, item: str | None) -> int:
         return 0
 
 
+def _validate_regexes(**patterns: str) -> str | None:
+    """Return an error message for the first malformed regex, else None.
+
+    The SQLite ``REGEXP`` function (``_regexp``) silently treats a malformed
+    pattern as "no match", which is indistinguishable from a genuine empty
+    result. Tools accepting an explicit regex pre-validate with this so a bad
+    pattern surfaces as an ``error`` (matching ``cache_find_regex``) instead of
+    returning a misleading empty list.
+    """
+    for name, expr in patterns.items():
+        if not expr:
+            continue
+        try:
+            re.compile(expr)
+        except re.error as exc:
+            return f"Invalid regex for {name}: {exc}"
+    return None
+
+
 def _connect_ro(cache_path: str) -> sqlite3.Connection:
     conn = sqlite3.connect(f"file:{cache_path}?mode=ro", uri=True, timeout=10.0)
     conn.row_factory = sqlite3.Row
@@ -802,6 +821,10 @@ def cache_list_funcs(
     include_xrefs: Annotated[bool, "Include callers/xrefs_to for each function"] = False,
 ) -> dict[str, Any]:
     """List functions from the persistent SQLite cache."""
+    rx_error = _validate_regexes(name_pattern=name_pattern)
+    if rx_error:
+        return {"items": [], "total": 0, "offset": offset, "limit": limit, "error": rx_error}
+
     paths = _current_paths()
     error = _cache_not_ready(paths["cache_path"])
     if error:
@@ -865,6 +888,12 @@ def cache_entity_query(
             "limit": limit,
             "error": f"Unsupported kind: {kind!r}",
         }
+
+    rx_error = _validate_regexes(
+        pattern=pattern, segment=segment, module_pattern=module_pattern
+    )
+    if rx_error:
+        return {"items": [], "total": 0, "offset": offset, "limit": limit, "error": rx_error}
 
     paths = _current_paths()
     error = _cache_not_ready(paths["cache_path"])
@@ -1060,6 +1089,10 @@ def cache_callgraph(
     direction = (direction or "both").strip().lower()
     if direction not in {"calls", "callers", "both"}:
         return {"edges": [], "total": 0, "error": f"Unsupported direction: {direction!r}"}
+
+    rx_error = _validate_regexes(name_pattern=name_pattern)
+    if rx_error:
+        return {"edges": [], "total": 0, "offset": offset, "limit": limit, "error": rx_error}
 
     paths = _current_paths()
     error = _cache_not_ready(paths["cache_path"])
