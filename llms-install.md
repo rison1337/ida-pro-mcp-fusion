@@ -2,6 +2,12 @@
 
 IDA Pro MCP Fusion is a local stdio MCP server for IDA Pro reverse engineering. It requires IDA Pro 8.3 or newer, Python 3.11+, and `uv`/`uvx`. IDA Free is not supported.
 
+If `uvx` is not available, install uv first:
+
+```bash
+python -m pip install uv
+```
+
 Use this MCP configuration:
 
 ```json

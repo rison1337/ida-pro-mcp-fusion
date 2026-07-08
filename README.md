@@ -56,6 +56,11 @@ Concretely, this fork adds **11 tools over upstream** — the 9-tool `cache_*` s
 
 - [Python](https://www.python.org/downloads/) (**3.11 or higher**)
   - Use `idapyswitch` to switch to the newest Python version
+- [uv](https://astral.sh/uv) / `uvx`
+  - If `uvx` is not available, install uv first:
+    ```bash
+    python -m pip install uv
+    ```
 - [IDA Pro](https://hex-rays.com/ida-pro) (8.3 or higher, 9 recommended), **IDA Free is not supported**
 - Supported MCP Client (pick one you like)
   - [Amazon Q Developer CLI](https://aws.amazon.com/q/developer/)
@@ -86,6 +91,12 @@ Concretely, this fork adds **11 tools over upstream** — the 9-tool `cache_*` s
 ## Installation (Fusion Edition)
 
 For MCP clients that can run a stdio command, use the GitHub-backed `uvx` command:
+
+If `uvx` is not available yet, install uv first:
+
+```bash
+python -m pip install uv
+```
 
 ```json
 {
