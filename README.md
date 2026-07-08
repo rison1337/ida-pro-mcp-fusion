@@ -5,7 +5,9 @@
 Simple [MCP Server](https://modelcontextprotocol.io/introduction) to allow vibe reversing in IDA Pro — the **Fusion Edition** fuses the latest upstream with a persistent SQLite cache and a multi-binary headless supervisor (**76 tools**).
 
 **Registry name:** `io.github.rison1337/ida-pro-mcp-fusion`<br>
-**Repository:** <https://github.com/rison1337/ida-pro-mcp-fusion>
+**Repository:** <https://github.com/rison1337/ida-pro-mcp-fusion><br>
+**Official MCP Registry:** <https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.rison1337/ida-pro-mcp-fusion><br>
+**MCPB bundle:** <https://github.com/rison1337/ida-pro-mcp-fusion/releases/download/v2.0.0/ida-pro-mcp-fusion-2.0.0.mcpb>
 
 https://github.com/user-attachments/assets/6ebeaa92-a9db-43fa-b756-eececce2aca0
 
