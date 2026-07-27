@@ -52,6 +52,9 @@ ida-mcp-trace-dump = "ida_pro_mcp.trace_dump:main"
 [tool.pyright]
 include = ["src/ida_pro_mcp"]
 
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
 [tool.ruff]
 exclude = ["src/ida_pro_mcp/ida_mcp/zeromcp/*.py"]
 
