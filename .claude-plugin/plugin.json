@@ -1,7 +1,7 @@
 {
-  "name": "ida-pro",
-  "version": "0.1.0",
-  "description": "AI-powered reverse engineering assistant that bridges IDA Pro with language models through MCP.",
+  "name": "ida-pro-mcp-fusion",
+  "version": "2.0.0",
+  "description": "Multi-binary IDA Pro MCP workspace with persistent SQLite analysis cache and headless workers.",
   "mcpServers": {
     "idalib": {
       "command": "uv",
