@@ -1,0 +1,97 @@
+<svg width="1280" height="520" viewBox="0 0 1280 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1280" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#08111D"/>
+      <stop offset="1" stop-color="#091B1C"/>
+    </linearGradient>
+    <linearGradient id="flow" x1="135" y1="260" x2="1138" y2="260" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#60A5FA"/>
+      <stop offset="0.52" stop-color="#5EEAD4"/>
+      <stop offset="1" stop-color="#FBBF24"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="9" stdDeviation="13" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5EEAD4"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="1278" height="518" rx="24" fill="url(#background)" stroke="#FFFFFF" stroke-opacity="0.1" stroke-width="2"/>
+  <text x="48" y="56" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700">How a request moves through Fusion</text>
+  <text x="48" y="83" fill="#8494A8" font-family="Segoe UI, Arial, sans-serif" font-size="15">Live IDA state for precision. SQLite state for fast repeated queries.</text>
+
+  <path d="M256 244H344" stroke="url(#flow)" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M584 244H666" stroke="url(#flow)" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M930 191H1007" stroke="url(#flow)" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M930 316H1007" stroke="url(#flow)" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g transform="translate(48 161)" filter="url(#soft)">
+    <rect width="208" height="166" rx="18" fill="#101B29" stroke="#60A5FA" stroke-opacity="0.42"/>
+    <rect x="20" y="22" width="48" height="48" rx="13" fill="#172A40"/>
+    <path d="M32 46H56M44 34V58" stroke="#93C5FD" stroke-width="3" stroke-linecap="round"/>
+    <text x="20" y="101" fill="#BFDBFE" font-family="Consolas, Courier New, monospace" font-size="12">MCP CLIENT</text>
+    <text x="20" y="128" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Coding agent</text>
+    <text x="20" y="151" fill="#8CA0B8" font-family="Segoe UI, Arial, sans-serif" font-size="13">stdio or HTTP</text>
+  </g>
+
+  <g transform="translate(350 135)" filter="url(#soft)">
+    <rect width="234" height="218" rx="18" fill="#102421" stroke="#5EEAD4" stroke-opacity="0.46"/>
+    <text x="22" y="36" fill="#6EE7D7" font-family="Consolas, Courier New, monospace" font-size="12">IDALIB-MCP</text>
+    <text x="22" y="67" fill="#F0FDFA" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Session supervisor</text>
+    <rect x="22" y="91" width="190" height="34" rx="9" fill="#0B1918"/>
+    <circle cx="41" cy="108" r="5" fill="#34D399"/>
+    <text x="56" y="113" fill="#BEECE6" font-family="Segoe UI, Arial, sans-serif" font-size="13">route by database</text>
+    <rect x="22" y="135" width="190" height="34" rx="9" fill="#0B1918"/>
+    <circle cx="41" cy="152" r="5" fill="#5EEAD4"/>
+    <text x="56" y="157" fill="#BEECE6" font-family="Segoe UI, Arial, sans-serif" font-size="13">worker lifecycle</text>
+    <rect x="22" y="179" width="190" height="18" rx="9" fill="#0A1515"/>
+    <rect x="22" y="179" width="132" height="18" rx="9" fill="#174B45"/>
+    <text x="158" y="192" fill="#7DD3C7" font-family="Consolas, Courier New, monospace" font-size="10">4 MAX</text>
+  </g>
+
+  <g transform="translate(672 103)" filter="url(#soft)">
+    <rect width="258" height="284" rx="18" fill="#141929" stroke="#818CF8" stroke-opacity="0.44"/>
+    <text x="22" y="36" fill="#A5B4FC" font-family="Consolas, Courier New, monospace" font-size="12">ISOLATED WORKERS</text>
+    <text x="22" y="67" fill="#F5F3FF" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">One process per IDB</text>
+
+    <g transform="translate(22 91)">
+      <rect width="214" height="48" rx="10" fill="#0E1421" stroke="#818CF8" stroke-opacity="0.24"/>
+      <circle cx="22" cy="24" r="6" fill="#818CF8"/>
+      <text x="39" y="21" fill="#E0E7FF" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">loader.exe</text>
+      <text x="39" y="36" fill="#74839B" font-family="Consolas, Courier New, monospace" font-size="10">SESSION case_1</text>
+    </g>
+    <g transform="translate(22 149)">
+      <rect width="214" height="48" rx="10" fill="#0E1421" stroke="#A78BFA" stroke-opacity="0.24"/>
+      <circle cx="22" cy="24" r="6" fill="#A78BFA"/>
+      <text x="39" y="21" fill="#EDE9FE" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">payload.dll</text>
+      <text x="39" y="36" fill="#74839B" font-family="Consolas, Courier New, monospace" font-size="10">SESSION case_2</text>
+    </g>
+    <g transform="translate(22 207)">
+      <rect width="214" height="48" rx="10" fill="#0E1421" stroke="#C4B5FD" stroke-opacity="0.2"/>
+      <circle cx="22" cy="24" r="6" fill="#C4B5FD"/>
+      <text x="39" y="21" fill="#EDE9FE" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">more samples</text>
+      <text x="39" y="36" fill="#74839B" font-family="Consolas, Courier New, monospace" font-size="10">DISCOVER / ADOPT</text>
+    </g>
+  </g>
+
+  <g transform="translate(1011 106)" filter="url(#soft)">
+    <rect width="221" height="144" rx="18" fill="#182313" stroke="#FBBF24" stroke-opacity="0.42"/>
+    <text x="20" y="34" fill="#FCD34D" font-family="Consolas, Courier New, monospace" font-size="12">LIVE ENGINE</text>
+    <text x="20" y="65" fill="#FFFBEB" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">IDA + Hex-Rays</text>
+    <text x="20" y="94" fill="#C8B991" font-family="Segoe UI, Arial, sans-serif" font-size="13">decompile · mutate</text>
+    <text x="20" y="116" fill="#C8B991" font-family="Segoe UI, Arial, sans-serif" font-size="13">debug · inspect</text>
+  </g>
+
+  <g transform="translate(1011 276)" filter="url(#soft)">
+    <rect width="221" height="144" rx="18" fill="#102623" stroke="#34D399" stroke-opacity="0.42"/>
+    <text x="20" y="34" fill="#6EE7B7" font-family="Consolas, Courier New, monospace" font-size="12">PERSISTENT INDEX</text>
+    <text x="20" y="65" fill="#ECFDF5" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">SQLite cache</text>
+    <text x="20" y="94" fill="#92C5B1" font-family="Segoe UI, Arial, sans-serif" font-size="13">xrefs · strings · funcs</text>
+    <text x="20" y="116" fill="#92C5B1" font-family="Segoe UI, Arial, sans-serif" font-size="13">imports · call graph</text>
+  </g>
+
+  <g transform="translate(48 453)">
+    <circle cx="7" cy="7" r="7" fill="#34D399"/>
+    <text x="23" y="12" fill="#93A4B8" font-family="Segoe UI, Arial, sans-serif" font-size="13">Workers can outlive the supervisor and be adopted by the next connection.</text>
+  </g>
+</svg>

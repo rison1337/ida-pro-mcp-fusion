@@ -34,4 +34,4 @@ uvx --from git+https://github.com/rison1337/ida-pro-mcp-fusion idalib-mcp --stdi
 
 If IDA's Python runtime is not configured, run Hex-Rays `idapyswitch` first and select the Python 3.11+ environment that has the `idapro` package available.
 
-After installation, open a binary through the MCP server with `idb_open` or use `idb_batch_open` for multiple binaries. The server exposes 76 tools, including persistent SQLite cache tools and multi-binary headless session management.
+After installation, open a binary through the MCP server with `idb_open` or use `idb_batch_open` for multiple binaries. The codebase registers 75 IDA-facing analysis tools plus multi-binary headless session management. The visible tool count varies with unsafe tools, debugger extensions, and profiles.

@@ -3,7 +3,7 @@
   "name": "ida-pro-mcp-fusion",
   "display_name": "IDA Pro MCP Fusion",
   "version": "2.0.0",
-  "description": "IDA Pro MCP fusion with 76 reverse-engineering tools, persistent SQLite cache queries, and multi-binary headless analysis sessions.",
+  "description": "IDA Pro MCP with 75+ analysis tools, persistent SQLite cache queries, and multi-binary headless sessions.",
   "long_description": "Fusion fork of IDA Pro MCP for agentic reverse engineering. It keeps upstream IDA Pro MCP behavior and adds a persistent SQLite cache, cache query tools, a multi-worker headless idalib supervisor, batch IDB opening, and clean session closing for single-binary and multi-binary reversing workflows. Requires a local IDA Pro installation and IDA's Python/idalib support.",
   "author": {
     "name": "rison1337",

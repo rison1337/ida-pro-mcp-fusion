@@ -5,10 +5,10 @@ description = "Fusion Edition of IDA Pro MCP with persistent SQLite cache and mu
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [
+    { name = "rison1337" },
     { name = "mrexodia" },
     { name = "can1357" },
     { name = "IDA Pro MCP Contributors" },
-    { name = "rison1337" },
 ]
 keywords = ["ida", "ida-pro", "mcp", "reverse-engineering", "malware-analysis", "llm", "plugin"]
 classifiers = [
@@ -33,8 +33,10 @@ dev = [
 ]
 
 [project.urls]
+Homepage = "https://github.com/rison1337/ida-pro-mcp-fusion"
 Repository = "https://github.com/rison1337/ida-pro-mcp-fusion"
 Issues = "https://github.com/rison1337/ida-pro-mcp-fusion/issues"
+Releases = "https://github.com/rison1337/ida-pro-mcp-fusion/releases"
 Upstream = "https://github.com/mrexodia/ida-pro-mcp"
 
 [build-system]

@@ -1,11 +1,11 @@
 {
   "IDAMetadataDescriptorVersion": 1,
   "plugin": {
-    "name": "IDA Pro MCP",
+    "name": "IDA Pro MCP Fusion",
     "entryPoint": "src/ida_pro_mcp/ida_mcp.py",
     "categories": ["api-scripting-and-automation", "debugging-and-tracing", "malware-analysis"],
-    "logoPath": ".github/logo.png",
-    "description": "AI-powered reverse engineering assistant that bridges IDA Pro with language models through MCP.",
+    "logoPath": "assets/logo-512.png",
+    "description": "Multi-binary MCP bridge for IDA Pro with persistent SQLite analysis cache and headless workers.",
     "idaVersions": ">=8.3",
     "version": "2.0.0"
   }
