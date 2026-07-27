@@ -302,7 +302,7 @@ Clone the repository and run the platform-independent test suite:
 ```bash
 git clone https://github.com/rison1337/ida-pro-mcp-fusion.git
 cd ida-pro-mcp-fusion
-python -m pip install pytest jsonschema "mcp>=1.0"
+python -m pip install pytest jsonschema "mcp>=1.0" "tomli-w>=1.0"
 python -m pytest -q tests
 ```
 
