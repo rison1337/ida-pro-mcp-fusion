@@ -1,120 +1,86 @@
-<svg width="1440" height="520" viewBox="0 0 1440 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="1440" height="500" viewBox="0 0 1440 500" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="40" y1="18" x2="1402" y2="504" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#090B12"/>
-      <stop offset="0.52" stop-color="#10131D"/>
-      <stop offset="1" stop-color="#121526"/>
+    <linearGradient id="background" x1="34" y1="24" x2="1402" y2="478" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B0D15"/>
+      <stop offset="0.56" stop-color="#10131D"/>
+      <stop offset="1" stop-color="#111827"/>
     </linearGradient>
-    <linearGradient id="brand" x1="154" y1="103" x2="249" y2="213" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#6EE7F7"/>
-      <stop offset="0.5" stop-color="#7C6CF2"/>
-      <stop offset="1" stop-color="#FF6B8A"/>
-    </linearGradient>
-    <linearGradient id="line" x1="850" y1="260" x2="1296" y2="260" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#6EE7F7" stop-opacity="0.12"/>
-      <stop offset="0.5" stop-color="#6EE7F7"/>
-      <stop offset="1" stop-color="#7C6CF2" stop-opacity="0.32"/>
-    </linearGradient>
-    <radialGradient id="glowA" cx="0" cy="0" r="1" gradientTransform="translate(1152 183) rotate(90) scale(256 334)" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#38BDF8" stop-opacity="0.17"/>
+    <radialGradient id="leftGlow" cx="0" cy="0" r="1" gradientTransform="translate(180 125) rotate(34) scale(430 310)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#675CF5" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#675CF5" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="rightGlow" cx="0" cy="0" r="1" gradientTransform="translate(1180 240) rotate(90) scale(300 390)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8" stop-opacity="0.14"/>
       <stop offset="1" stop-color="#38BDF8" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glowB" cx="0" cy="0" r="1" gradientTransform="translate(155 84) rotate(34) scale(341 260)" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#7C6CF2" stop-opacity="0.23"/>
-      <stop offset="1" stop-color="#7C6CF2" stop-opacity="0"/>
-    </radialGradient>
-    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
-      <path d="M36 0H0V36" stroke="#C7D2FE" stroke-opacity="0.035"/>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#8B7CF6"/>
+      <stop offset="1" stop-color="#5BC7F2"/>
+    </linearGradient>
+    <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#8B7CF6"/>
+      <stop offset="1" stop-color="#5BC7F2"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" stroke="#D9E2FF" stroke-opacity="0.025"/>
     </pattern>
-    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="14" stdDeviation="20" flood-color="#000000" flood-opacity="0.35"/>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="16" stdDeviation="22" flood-color="#000000" flood-opacity="0.34"/>
     </filter>
   </defs>
 
-  <rect x="1" y="1" width="1438" height="518" rx="30" fill="url(#bg)"/>
-  <rect x="1" y="1" width="1438" height="518" rx="30" fill="url(#grid)"/>
-  <rect x="1" y="1" width="1438" height="518" rx="30" fill="url(#glowA)"/>
-  <rect x="1" y="1" width="1438" height="518" rx="30" fill="url(#glowB)"/>
-  <rect x="1" y="1" width="1438" height="518" rx="30" stroke="#FFFFFF" stroke-opacity="0.1" stroke-width="2"/>
+  <rect x="1" y="1" width="1438" height="498" rx="30" fill="url(#background)"/>
+  <rect x="1" y="1" width="1438" height="498" rx="30" fill="url(#grid)"/>
+  <rect x="1" y="1" width="1438" height="498" rx="30" fill="url(#leftGlow)"/>
+  <rect x="1" y="1" width="1438" height="498" rx="30" fill="url(#rightGlow)"/>
+  <rect x="1" y="1" width="1438" height="498" rx="30" stroke="#DCE4FF" stroke-opacity="0.11" stroke-width="2"/>
 
-  <g transform="translate(92 90)" filter="url(#shadow)">
-    <rect width="112" height="112" rx="28" fill="#11141E" stroke="#C7D2FE" stroke-opacity="0.18" stroke-width="2"/>
-    <path d="M29 32H83M29 80H83M32 32V80M80 32V80" stroke="url(#brand)" stroke-width="6" stroke-linecap="round"/>
-    <path d="M44 54H68M44 66H61" stroke="#F4F7FF" stroke-width="6" stroke-linecap="round"/>
-    <circle cx="80" cy="80" r="9" fill="#FF6B8A"/>
+  <g transform="translate(86 78)" filter="url(#shadow)">
+    <rect width="104" height="104" rx="27" fill="#141824" stroke="#9A8CF7" stroke-opacity="0.32" stroke-width="2"/>
+    <path d="M27 29H77M27 75H77M30 29V75M74 29V75" stroke="url(#accent)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M42 50H65M42 63H60" stroke="#F8FAFC" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="76" cy="76" r="8" fill="#5BC7F2"/>
   </g>
 
-  <text x="236" y="126" fill="#6EE7F7" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700" letter-spacing="4">REVERSE ENGINEERING / MCP</text>
-  <text x="236" y="205" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="66" font-weight="750" letter-spacing="-2">IDA PRO MCP</text>
-  <text x="236" y="258" fill="#B8AEFF" font-family="Consolas, Courier New, monospace" font-size="29" font-weight="700" letter-spacing="5">FUSION EDITION</text>
-  <text x="96" y="328" fill="#B8BECD" font-family="Segoe UI, Arial, sans-serif" font-size="24">One endpoint for live IDA analysis, persistent cache,</text>
-  <text x="96" y="362" fill="#B8BECD" font-family="Segoe UI, Arial, sans-serif" font-size="24">and multi-binary headless workflows.</text>
+  <text x="222" y="110" fill="#7DD8F5" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="4">REVERSE ENGINEERING / MCP</text>
+  <text x="82" y="230" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="78" font-weight="750" letter-spacing="-3">IDA PRO MCP</text>
+  <text x="86" y="286" fill="#A99DFF" font-family="Consolas, Courier New, monospace" font-size="31" font-weight="700" letter-spacing="6">FUSION EDITION</text>
 
-  <g transform="translate(96 407)">
-    <rect width="218" height="47" rx="23.5" fill="#101B25" stroke="#6EE7F7" stroke-opacity="0.36"/>
-    <circle cx="25" cy="23.5" r="5" fill="#6EE7F7"/>
-    <text x="42" y="30" fill="#DFF9FF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="650">SQLITE CACHE</text>
-  </g>
-  <g transform="translate(327 407)">
-    <rect width="242" height="47" rx="23.5" fill="#18172A" stroke="#7C6CF2" stroke-opacity="0.42"/>
-    <circle cx="25" cy="23.5" r="5" fill="#8B7CF6"/>
-    <text x="42" y="30" fill="#E9E5FF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="650">MULTI-BINARY</text>
-  </g>
-  <g transform="translate(582 407)">
-    <rect width="218" height="47" rx="23.5" fill="#25151E" stroke="#FF6B8A" stroke-opacity="0.36"/>
-    <circle cx="25" cy="23.5" r="5" fill="#FF6B8A"/>
-    <text x="42" y="30" fill="#FFE3EA" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="650">GUI + HEADLESS</text>
-  </g>
+  <text x="86" y="356" fill="#D0D5E2" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="450">Live analysis for every IDA database.</text>
+  <text x="86" y="397" fill="#D0D5E2" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="450">One endpoint. Persistent state. Any workflow.</text>
 
-  <g transform="translate(895 86)" filter="url(#shadow)">
-    <rect width="435" height="350" rx="26" fill="#0D1018" stroke="#C7D2FE" stroke-opacity="0.14" stroke-width="2"/>
-    <rect x="1" y="1" width="433" height="56" rx="25" fill="#151925"/>
-    <circle cx="28" cy="29" r="6" fill="#FF6B8A"/>
-    <circle cx="48" cy="29" r="6" fill="#8B7CF6"/>
-    <circle cx="68" cy="29" r="6" fill="#6EE7F7"/>
-    <text x="325" y="35" fill="#78DFFF" font-family="Consolas, Courier New, monospace" font-size="13">FUSION://LIVE</text>
+  <g transform="translate(854 68)" filter="url(#shadow)">
+    <rect width="500" height="364" rx="28" fill="#0D111A" stroke="#DCE4FF" stroke-opacity="0.13" stroke-width="2"/>
+    <rect x="1" y="1" width="498" height="64" rx="27" fill="#151A27"/>
+    <circle cx="30" cy="32" r="6" fill="#8B7CF6"/>
+    <circle cx="51" cy="32" r="6" fill="#6EAEF7"/>
+    <circle cx="72" cy="32" r="6" fill="#5BC7F2"/>
+    <text x="321" y="40" fill="#8EDDF7" font-family="Consolas, Courier New, monospace" font-size="16" font-weight="700">FUSION://LIVE</text>
 
-    <g transform="translate(30 84)">
-      <rect width="118" height="56" rx="12" fill="#111827" stroke="#6EE7F7" stroke-opacity="0.42"/>
-      <text x="17" y="24" fill="#8DEBFA" font-family="Consolas, Courier New, monospace" font-size="12">MCP CLIENT</text>
-      <text x="17" y="42" fill="#EFFBFF" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">agent</text>
-    </g>
-    <path d="M150 112H191" stroke="url(#line)" stroke-width="2.5"/>
-    <path d="M182 105L191 112L182 119" stroke="#6EE7F7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <g transform="translate(194 84)">
-      <rect width="210" height="56" rx="12" fill="#19172A" stroke="#8B7CF6" stroke-opacity="0.54"/>
-      <text x="17" y="24" fill="#B8AEFF" font-family="Consolas, Courier New, monospace" font-size="12">SUPERVISOR</text>
-      <text x="17" y="42" fill="#F2F0FF" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">route by database ID</text>
+    <g transform="translate(34 98)">
+      <rect width="432" height="64" rx="15" fill="#151827" stroke="#8B7CF6" stroke-opacity="0.45" stroke-width="2"/>
+      <circle cx="30" cy="32" r="8" fill="#8B7CF6"/>
+      <text x="52" y="29" fill="#F1EFFF" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">MCP client</text>
+      <text x="52" y="50" fill="#969DB0" font-family="Segoe UI, Arial, sans-serif" font-size="16">one stable connection</text>
     </g>
 
-    <path d="M299 140V170M299 170H98V191M299 170H299V191M299 170H365V191" stroke="url(#line)" stroke-width="2.5"/>
+    <path d="M250 162V190" stroke="url(#flow)" stroke-width="3"/>
+    <path d="M242 181L250 190L258 181" stroke="#71C1F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 
-    <g transform="translate(30 191)">
-      <rect width="136" height="66" rx="13" fill="#141826" stroke="#6F7EF7" stroke-opacity="0.46"/>
-      <circle cx="23" cy="22" r="6" fill="#6F7EF7"/>
-      <text x="38" y="27" fill="#DCE2FF" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">loader.exe</text>
-      <text x="18" y="50" fill="#7E879E" font-family="Consolas, Courier New, monospace" font-size="11">WORKER 01</text>
-    </g>
-    <g transform="translate(180 191)">
-      <rect width="136" height="66" rx="13" fill="#141826" stroke="#9A7CF7" stroke-opacity="0.46"/>
-      <circle cx="23" cy="22" r="6" fill="#9A7CF7"/>
-      <text x="38" y="27" fill="#EBE4FF" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">payload.dll</text>
-      <text x="18" y="50" fill="#7E879E" font-family="Consolas, Courier New, monospace" font-size="11">WORKER 02</text>
-    </g>
-    <g transform="translate(330 191)">
-      <rect width="74" height="66" rx="13" fill="#141826" stroke="#6EE7F7" stroke-opacity="0.34"/>
-      <circle cx="19" cy="18" r="4" fill="#6EE7F7"/>
-      <circle cx="19" cy="32" r="4" fill="#8B7CF6"/>
-      <circle cx="19" cy="46" r="4" fill="#FF6B8A"/>
-      <path d="M30 18H56M30 32H56M30 46H56" stroke="#D8DDF0" stroke-opacity="0.78" stroke-width="3" stroke-linecap="round"/>
-      <text x="19" y="60" fill="#7E879E" font-family="Consolas, Courier New, monospace" font-size="9">POOL</text>
+    <g transform="translate(34 190)">
+      <rect width="432" height="64" rx="15" fill="#16192A" stroke="#756AF0" stroke-opacity="0.54" stroke-width="2"/>
+      <circle cx="30" cy="32" r="8" fill="#756AF0"/>
+      <text x="52" y="29" fill="#F3F1FF" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Fusion router</text>
+      <text x="52" y="50" fill="#969DB0" font-family="Segoe UI, Arial, sans-serif" font-size="16">selects the right database</text>
     </g>
 
-    <g transform="translate(30 281)">
-      <rect width="374" height="42" rx="11" fill="#101B25" stroke="#6EE7F7" stroke-opacity="0.36"/>
-      <path d="M20 13H36V29H20V13ZM23 9H33V13H23V9Z" stroke="#6EE7F7" stroke-width="1.7"/>
-      <text x="52" y="26" fill="#DFF9FF" font-family="Consolas, Courier New, monospace" font-size="12">PERSISTENT IDB.MCP.SQLITE INDEX</text>
-      <circle cx="350" cy="21" r="5" fill="#FF6B8A"/>
+    <path d="M250 254V282" stroke="url(#flow)" stroke-width="3"/>
+    <path d="M242 273L250 282L258 273" stroke="#71C1F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(34 282)">
+      <rect width="432" height="56" rx="15" fill="#111A24" stroke="#5BC7F2" stroke-opacity="0.42" stroke-width="2"/>
+      <circle cx="30" cy="28" r="8" fill="#5BC7F2"/>
+      <text x="52" y="35" fill="#E7FAFF" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">IDA workers + persistent index</text>
     </g>
   </g>
 </svg>
