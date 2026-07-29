@@ -1,7 +1,7 @@
 <a id="english"></a>
 
 <div align="center">
-  <img src="assets/readme-banner.svg?v=3f25728" width="100%" alt="IDA Pro MCP Fusion — multi-binary reverse engineering through MCP">
+  <img src="assets/hero-banner-v2.svg" width="100%" alt="IDA Pro MCP Fusion — multi-binary reverse engineering through MCP">
 </div>
 
 <!-- mcp-name: io.github.rison1337/ida-pro-mcp-fusion -->
