@@ -5,16 +5,21 @@
 <!-- mcp-name: io.github.rison1337/ida-pro-mcp-fusion -->
 
 <p align="center">
-  <a href="https://github.com/rison1337/ida-pro-mcp-fusion/releases/latest"><img src="https://img.shields.io/github/v/release/rison1337/ida-pro-mcp-fusion?style=flat-square&color=5eead4&label=release" alt="Latest release"></a>
+  <a href="https://github.com/rison1337/ida-pro-mcp-fusion/releases/latest"><img src="https://img.shields.io/github/v/release/rison1337/ida-pro-mcp-fusion?style=flat-square&color=7c6cf2&label=release" alt="Latest release"></a>
   <a href="https://github.com/rison1337/ida-pro-mcp-fusion/actions"><img src="https://img.shields.io/github/actions/workflow/status/rison1337/ida-pro-mcp-fusion/ci.yml?branch=main&style=flat-square&label=tests" alt="Tests"></a>
-  <img src="https://img.shields.io/badge/Python-3.11%2B-60a5fa?style=flat-square" alt="Python 3.11 or newer">
-  <img src="https://img.shields.io/badge/IDA_Pro-8.3%2B-a78bfa?style=flat-square" alt="IDA Pro 8.3 or newer">
-  <img src="https://img.shields.io/badge/MCP-stdio_%7C_HTTP-f59e0b?style=flat-square" alt="MCP over stdio or HTTP">
+  <img src="https://img.shields.io/badge/Python-3.11%2B-45d7ff?style=flat-square" alt="Python 3.11 or newer">
+  <img src="https://img.shields.io/badge/IDA_Pro-8.3%2B-8b7cf6?style=flat-square" alt="IDA Pro 8.3 or newer">
+  <img src="https://img.shields.io/badge/MCP-stdio_%7C_HTTP-ff6b8a?style=flat-square" alt="MCP over stdio or HTTP">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-e5e7eb?style=flat-square" alt="MIT license"></a>
 </p>
 
 <p align="center">
   <strong>One MCP endpoint. Many binaries. Persistent analysis context.</strong>
+</p>
+
+<p align="center">
+  <a href="README.md"><img src="https://img.shields.io/badge/English-7c6cf2?style=flat-square" alt="English"></a>
+  <a href="README.ru.md"><img src="https://img.shields.io/badge/Русский-171925?style=flat-square" alt="Русский"></a>
 </p>
 
 <p align="center">

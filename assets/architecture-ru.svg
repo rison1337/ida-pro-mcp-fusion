@@ -17,81 +17,81 @@
     </marker>
   </defs>
   <rect x="1" y="1" width="1278" height="518" rx="24" fill="url(#background)" stroke="#FFFFFF" stroke-opacity="0.1" stroke-width="2"/>
-  <text x="48" y="56" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700">How a request moves through Fusion</text>
-  <text x="48" y="83" fill="#9299AC" font-family="Segoe UI, Arial, sans-serif" font-size="15">Live IDA state for precision. SQLite state for fast repeated queries.</text>
+  <text x="48" y="56" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700">Как запрос проходит через Fusion</text>
+  <text x="48" y="83" fill="#9299AC" font-family="Segoe UI, Arial, sans-serif" font-size="15">Точный анализ в IDA. Быстрые повторные запросы из SQLite.</text>
 
   <path d="M256 244H344" stroke="url(#flow)" stroke-width="3" marker-end="url(#arrow)"/>
   <path d="M584 244H666" stroke="url(#flow)" stroke-width="3" marker-end="url(#arrow)"/>
   <path d="M930 191H1007" stroke="url(#flow)" stroke-width="3" marker-end="url(#arrow)"/>
   <path d="M930 316H1007" stroke="url(#flow)" stroke-width="3" marker-end="url(#arrow)"/>
 
-  <g transform="translate(48 161)" filter="url(#soft)">
+  <g transform="translate(48 161)">
     <rect width="208" height="166" rx="18" fill="#111827" stroke="#6EE7F7" stroke-opacity="0.44"/>
     <rect x="20" y="22" width="48" height="48" rx="13" fill="#162534"/>
     <path d="M32 46H56M44 34V58" stroke="#8DEBFA" stroke-width="3" stroke-linecap="round"/>
-    <text x="20" y="101" fill="#8DEBFA" font-family="Consolas, Courier New, monospace" font-size="12">MCP CLIENT</text>
-    <text x="20" y="128" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Coding agent</text>
+    <text x="20" y="101" fill="#8DEBFA" font-family="Consolas, Courier New, monospace" font-size="12">MCP КЛИЕНТ</text>
+    <text x="20" y="128" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Агент</text>
     <text x="20" y="151" fill="#9299AC" font-family="Segoe UI, Arial, sans-serif" font-size="13">stdio or HTTP</text>
   </g>
 
-  <g transform="translate(350 135)" filter="url(#soft)">
+  <g transform="translate(350 135)">
     <rect width="234" height="218" rx="18" fill="#19172A" stroke="#8B7CF6" stroke-opacity="0.5"/>
     <text x="22" y="36" fill="#B8AEFF" font-family="Consolas, Courier New, monospace" font-size="12">IDALIB-MCP</text>
-    <text x="22" y="67" fill="#F2F0FF" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Session supervisor</text>
+    <text x="22" y="67" fill="#F2F0FF" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Супервизор сессий</text>
     <rect x="22" y="91" width="190" height="34" rx="9" fill="#10111A"/>
     <circle cx="41" cy="108" r="5" fill="#6EE7F7"/>
-    <text x="56" y="113" fill="#D8DDF0" font-family="Segoe UI, Arial, sans-serif" font-size="13">route by database</text>
+    <text x="56" y="113" fill="#D8DDF0" font-family="Segoe UI, Arial, sans-serif" font-size="13">маршрут по базе</text>
     <rect x="22" y="135" width="190" height="34" rx="9" fill="#10111A"/>
     <circle cx="41" cy="152" r="5" fill="#FF6B8A"/>
-    <text x="56" y="157" fill="#D8DDF0" font-family="Segoe UI, Arial, sans-serif" font-size="13">worker lifecycle</text>
+    <text x="56" y="157" fill="#D8DDF0" font-family="Segoe UI, Arial, sans-serif" font-size="13">жизненный цикл</text>
     <rect x="22" y="179" width="190" height="18" rx="9" fill="#10111A"/>
     <rect x="22" y="179" width="132" height="18" rx="9" fill="#342D72"/>
-    <text x="158" y="192" fill="#B8AEFF" font-family="Consolas, Courier New, monospace" font-size="10">4 MAX</text>
+    <text x="158" y="192" fill="#B8AEFF" font-family="Consolas, Courier New, monospace" font-size="10">ДО 4</text>
   </g>
 
-  <g transform="translate(672 103)" filter="url(#soft)">
+  <g transform="translate(672 103)">
     <rect width="258" height="284" rx="18" fill="#141826" stroke="#6F7EF7" stroke-opacity="0.48"/>
-    <text x="22" y="36" fill="#AEB8FF" font-family="Consolas, Courier New, monospace" font-size="12">ISOLATED WORKERS</text>
-    <text x="22" y="67" fill="#F5F3FF" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">One process per IDB</text>
+    <text x="22" y="36" fill="#AEB8FF" font-family="Consolas, Courier New, monospace" font-size="10">ИЗОЛИРОВАННЫЕ ВОРКЕРЫ</text>
+    <text x="22" y="67" fill="#F5F3FF" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Один процесс на IDB</text>
 
     <g transform="translate(22 91)">
       <rect width="214" height="48" rx="10" fill="#0F121C" stroke="#6F7EF7" stroke-opacity="0.28"/>
       <circle cx="22" cy="24" r="6" fill="#6F7EF7"/>
       <text x="39" y="21" fill="#E0E7FF" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">loader.exe</text>
-      <text x="39" y="36" fill="#7E879E" font-family="Consolas, Courier New, monospace" font-size="10">SESSION case_1</text>
+      <text x="39" y="36" fill="#7E879E" font-family="Consolas, Courier New, monospace" font-size="10">СЕССИЯ case_1</text>
     </g>
     <g transform="translate(22 149)">
       <rect width="214" height="48" rx="10" fill="#0F121C" stroke="#9A7CF7" stroke-opacity="0.28"/>
       <circle cx="22" cy="24" r="6" fill="#9A7CF7"/>
       <text x="39" y="21" fill="#EDE9FE" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">payload.dll</text>
-      <text x="39" y="36" fill="#7E879E" font-family="Consolas, Courier New, monospace" font-size="10">SESSION case_2</text>
+      <text x="39" y="36" fill="#7E879E" font-family="Consolas, Courier New, monospace" font-size="10">СЕССИЯ case_2</text>
     </g>
     <g transform="translate(22 207)">
       <rect width="214" height="48" rx="10" fill="#0F121C" stroke="#6EE7F7" stroke-opacity="0.24"/>
       <circle cx="22" cy="24" r="6" fill="#6EE7F7"/>
-      <text x="39" y="21" fill="#EDE9FE" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">more samples</text>
-      <text x="39" y="36" fill="#7E879E" font-family="Consolas, Courier New, monospace" font-size="10">DISCOVER / ADOPT</text>
+      <text x="39" y="21" fill="#EDE9FE" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">другие файлы</text>
+      <text x="39" y="36" fill="#7E879E" font-family="Consolas, Courier New, monospace" font-size="10">НАЙТИ / ПРИНЯТЬ</text>
     </g>
   </g>
 
-  <g transform="translate(1011 106)" filter="url(#soft)">
+  <g transform="translate(1011 106)">
     <rect width="221" height="144" rx="18" fill="#24141D" stroke="#FF6B8A" stroke-opacity="0.46"/>
-    <text x="20" y="34" fill="#FF8FA7" font-family="Consolas, Courier New, monospace" font-size="12">LIVE ENGINE</text>
+    <text x="20" y="34" fill="#FF8FA7" font-family="Consolas, Courier New, monospace" font-size="12">ЖИВОЙ АНАЛИЗ</text>
     <text x="20" y="65" fill="#FFF0F4" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">IDA + Hex-Rays</text>
-    <text x="20" y="94" fill="#D6A8B3" font-family="Segoe UI, Arial, sans-serif" font-size="13">decompile · mutate</text>
-    <text x="20" y="116" fill="#D6A8B3" font-family="Segoe UI, Arial, sans-serif" font-size="13">debug · inspect</text>
+    <text x="20" y="94" fill="#D6A8B3" font-family="Segoe UI, Arial, sans-serif" font-size="13">декомпиляция · правки</text>
+    <text x="20" y="116" fill="#D6A8B3" font-family="Segoe UI, Arial, sans-serif" font-size="13">отладка · анализ</text>
   </g>
 
-  <g transform="translate(1011 276)" filter="url(#soft)">
+  <g transform="translate(1011 276)">
     <rect width="221" height="144" rx="18" fill="#101B25" stroke="#6EE7F7" stroke-opacity="0.44"/>
-    <text x="20" y="34" fill="#8DEBFA" font-family="Consolas, Courier New, monospace" font-size="12">PERSISTENT INDEX</text>
+    <text x="20" y="34" fill="#8DEBFA" font-family="Consolas, Courier New, monospace" font-size="11">ПОСТОЯННЫЙ ИНДЕКС</text>
     <text x="20" y="65" fill="#EFFBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">SQLite cache</text>
-    <text x="20" y="94" fill="#9AC4CF" font-family="Segoe UI, Arial, sans-serif" font-size="13">xrefs · strings · funcs</text>
-    <text x="20" y="116" fill="#9AC4CF" font-family="Segoe UI, Arial, sans-serif" font-size="13">imports · call graph</text>
+    <text x="20" y="94" fill="#9AC4CF" font-family="Segoe UI, Arial, sans-serif" font-size="13">xref · строки · функции</text>
+    <text x="20" y="116" fill="#9AC4CF" font-family="Segoe UI, Arial, sans-serif" font-size="13">импорты · граф вызовов</text>
   </g>
 
   <g transform="translate(48 453)">
     <circle cx="7" cy="7" r="7" fill="#8B7CF6"/>
-    <text x="23" y="12" fill="#9299AC" font-family="Segoe UI, Arial, sans-serif" font-size="13">Workers can outlive the supervisor and be adopted by the next connection.</text>
+    <text x="23" y="12" fill="#9299AC" font-family="Segoe UI, Arial, sans-serif" font-size="13">Воркеры переживают супервизор и принимаются следующим подключением.</text>
   </g>
 </svg>
